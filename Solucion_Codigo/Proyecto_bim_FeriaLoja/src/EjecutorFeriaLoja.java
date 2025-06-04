@@ -1,4 +1,7 @@
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -222,11 +225,10 @@ public class EjecutorFeriaLoja {
         int totalNormales = 0;
         int totalEspeciales = 0;
         int totalPersonas = 0;
-        double totalSinDescuento = 0;
         double totalConDescuento = 0;
 
-        for (Cliente cliente : listaCompradores) { //recorremos
-            if (cliente.getFactura() != null) { //comprobacion de que existe la factura
+        for (Cliente cliente : listaCompradores) {
+            if (cliente.getFactura() != null) {
                 Factura f = cliente.getFactura();
                 totalNormales += f.entrada.numEntradasN;
                 totalEspeciales += f.entrada.numEntradasE;
@@ -234,6 +236,7 @@ public class EjecutorFeriaLoja {
                 totalConDescuento += f.calcularTotalConDescuento();
             }
         }
+
         String reporteFinal = String.format(
                 "\nREPORTE FINAL DEL DÍA\n"
                 + "Total de clientes: %d\n"
@@ -249,6 +252,17 @@ public class EjecutorFeriaLoja {
         );
 
         System.out.println(reporteFinal);
+
+        // Guardar el mismo texto en un archivo .txt
+        try {
+            FileWriter archivo = new FileWriter("reporte_final.txt");
+            PrintWriter escritor = new PrintWriter(archivo);
+            escritor.println(reporteFinal); // escribe en el archivo
+            escritor.close(); // siempre cerrar el archivo
+            System.out.println("El reporte también ha sido guardado en 'reporte_final.txt'");
+        } catch (IOException e) {
+            System.out.println("Ocurrió un error al guardar el archivo: " + e.getMessage());
+        }
     }
 
     //modelo
