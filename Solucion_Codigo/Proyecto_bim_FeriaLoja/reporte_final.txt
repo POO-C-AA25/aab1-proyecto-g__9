@@ -1,0 +1,7 @@
+REPORTE FINAL DEL DÍA
+Total de clientes: 1
+Entradas normales vendidas: 3
+Entradas especiales vendidas: 5
+Total de personas: 8
+Recaudación final: 42,93
+
